@@ -1,0 +1,6 @@
+# dsh bundle patch: inserts the balance row into a profile's layer stack.
+# 当这个包被加入某个 profile 的 dsh.profile.bundles 时（官方 `dsh plugin add`
+# 会自动加），这里的 insert 就把余额行注册进去；不需要再手改 profile 的 patch。
+- insert:
+    - id: balance-chip
+      name: dsh-balance-chip

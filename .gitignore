@@ -1,0 +1,11 @@
+# Dependencies and build output
+node_modules/
+
+# Release artifacts are attached to GitHub Releases, not committed
+*.zip
+*.tgz
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+*.log
