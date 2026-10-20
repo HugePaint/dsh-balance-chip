@@ -2,7 +2,10 @@
   "name": "dsh-balance-chip",
   "version": "1.2.0",
   "description": "Live account balance and peak/off-peak billing window rows in the DSH sidebar footer",
-  "author": "Ivan Chen, HugePaint",
+  "author": {
+    "name": "Ivan Chen, HugePaint",
+    "url": "https://github.com/HugePaint"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -36,8 +39,13 @@
     "lib/client.js",
     "cordis.patch.yml",
     "README.md",
-    "AGENT-INSTALL.md"
+    "README.zh.md",
+    "AGENT-INSTALL.md",
+    "AGENT-INSTALL.zh.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
