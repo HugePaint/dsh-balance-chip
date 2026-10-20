@@ -44,13 +44,28 @@
 
 ## 安装
 
-需要 DSH 0.2.x；安装脚本需要 Python 3。Node.js 可选 —— 只有离线测试需要。
+需要 DSH 0.2.x。推荐走插件面板（不需要 Python）；下面的脚本方式是可选的旧路径。
+
+### 从插件面板安装（推荐）
+
+本包是一个标准 DSH npm 插件，已被 DSH 的插件管理器识别为 profile bundle：
+
+1. 打开 **插件** 面板 → **添加插件** → **安装第三方插件**
+2. 在「包名或地址」里填下面任一条：
+   - `dsh-balance-chip` —— 发布到 npm 之后可用
+   - 仓库目录的绝对路径，如 `C:\Users\你\GitHub\dsh-balance-chip`
+   - 打包文件的绝对路径，如 `C:\Users\你\Downloads\dsh-balance-chip-1.2.0.tgz`
+3. 安装后按提示刷新或重启 DSH。
+
+DSH 会把包名写进该 profile 的 `dsh.profile.bundles`，再由包内 `cordis.patch.yml` 的 `insert` 注册 `balance-chip` 条目 —— 不需要手工改任何配置文件。用目录形式安装时 pnpm 记录的是链接，源目录要保留；用 `.tgz` 则解包复制，源文件删掉也不影响。
 
 ### 交给 AI 助手
 
 把仓库（或 Release 里的 zip）交给你的助手，让它读 [`AGENT-INSTALL.zh.md`](AGENT-INSTALL.zh.md)。那份指南覆盖环境检查、离线校验、安装、激活、回报、排查、回滚，以及没有 Python 时的手动路径。
 
-### 自己装
+### 手动安装（旧方法）
+
+需要 Python 3。这条路径把包直接复制进 `node_modules` 并手改 profile 的 patch，**没有把包声明成 profile 的依赖**：之后用插件面板安装别的插件时，pnpm 会把它当作多余包清理掉（会移进 `node_modules/.ignored/`），插件就静默消失。除非有特殊理由，请用上面的插件面板。
 
 ```bash
 python3 install.py          # macOS / Linux
@@ -141,6 +156,7 @@ TZ=Pacific/Kiritimati node test-peak.cjs .   # 换时区应得到同一份结论
 
 | 版本 | 日期 | 说明 |
 |---|---|---|
+| 1.2.0 | 2026-10-20 | 改成标准 DSH npm 插件：去掉 `private`、去掉宿主探针，支持从插件面板安装（目录 / tarball / 包名） |
 | 1.1.1 | 2026-10-15 | 悬停改为按行组织；`aria-label` 独立为单行 |
 | 1.1.0 | 2026-10-14 | 新增峰谷时段行（时段、结束时刻、节假日表、config） |
 | 1.0.0 | 2026-10-14 | 仅余额行 |

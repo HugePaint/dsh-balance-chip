@@ -1,7 +1,6 @@
 {
   "name": "dsh-balance-chip",
-  "version": "1.1.1",
-  "private": true,
+  "version": "1.2.0",
   "description": "Live account balance and peak/off-peak billing window rows in the DSH sidebar footer",
   "author": "Ivan Chen, HugePaint",
   "license": "MIT",

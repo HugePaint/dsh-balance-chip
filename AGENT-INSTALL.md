@@ -3,6 +3,9 @@
 > You are holding a **DSH (DeepSeek Harness) client plugin**. Goal: install it into the human's DSH and confirm it works.
 > Order: **verify first (offline, about a minute) → install (writes two places) → activate → report back**. No network access is needed at any point.
 
+> ⚠️ **Prefer the plugin panel.** Since 1.2.0 this package is an ordinary DSH npm plugin: have the human open **Plugins → Add plugin → Install third-party plugin** and enter the package name, or the absolute path of this directory / a packed tarball. DSH records it as a profile dependency (`dsh.profile.bundles`) and enables it automatically.
+> The patch-insert flow below still works, but it does not declare the package as a dependency — a later plugin-panel install runs pnpm, which prunes this package as extraneous (moved into `node_modules/.ignored/`) and the plugin silently disappears. Use this guide only when the plugin panel is unavailable.
+
 ---
 
 ## 0. 30-second decision checklist

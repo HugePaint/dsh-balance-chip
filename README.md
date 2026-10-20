@@ -44,13 +44,28 @@ The statutory holiday table is compiled in (`lib/client.js`, `HOLIDAY_TABLE`) an
 
 ## Install
 
-Requirements: DSH 0.2.x, and Python 3 for the installer. Node.js is optional — only the offline tests need it.
+Requirements: DSH 0.2.x. The plugin panel route is recommended and needs no Python; the installer script below is an optional legacy path.
+
+### From the plugin panel (recommended)
+
+This package is an ordinary DSH npm plugin, recognised by DSH's plugin manager as a profile bundle:
+
+1. Open the **Plugins** panel → **Add plugin** → **Install third-party plugin**
+2. Enter any of:
+   - `dsh-balance-chip` — once published to npm
+   - the absolute path of a checkout, e.g. `C:\Users\you\GitHub\dsh-balance-chip`
+   - the absolute path of the packed tarball, e.g. `C:\Users\you\Downloads\dsh-balance-chip-1.2.0.tgz`
+3. Refresh or restart DSH when prompted.
+
+DSH records the package in that profile's `dsh.profile.bundles`, and the `insert` entry in this package's `cordis.patch.yml` registers `balance-chip` — no profile file needs hand editing. A directory install is recorded as a link, so keep the source directory; a `.tgz` install is unpacked into place and survives deleting the tarball.
 
 ### Let an agent do it
 
 Hand the repository, or the release zip, to your assistant and point it at [`AGENT-INSTALL.md`](AGENT-INSTALL.md). That guide covers environment checks, offline verification, installation, activation, reporting back, troubleshooting, rollback, and a no-Python manual path.
 
-### By hand
+### By hand (legacy)
+
+Needs Python 3. This path copies the package into `node_modules` and edits the profile's patch without declaring the package as a profile dependency: a later plugin-panel install runs pnpm, which prunes it as an extraneous package (moved into `node_modules/.ignored/`) and the plugin silently disappears. Prefer the plugin panel above.
 
 ```bash
 python3 install.py          # macOS / Linux
@@ -115,6 +130,7 @@ Both suites are offline: a minimal React-hooks runtime, a fake `ctx`, and a fake
 
 | Version | Date | Notes |
 |---|---|---|
+| 1.2.0 | 2026-10-20 | Packaged as a standard DSH npm plugin: `private` removed, host probe removed, installable from the plugin panel (directory / tarball / package name) |
 | 1.1.1 | 2026-10-15 | Hover tooltips split into short lines; `aria-label` now a separate single line |
 | 1.1.0 | 2026-10-14 | Added the billing-window row (peak / off-peak, end time, holiday table, config) |
 | 1.0.0 | 2026-10-14 | Balance row only |
